@@ -15,6 +15,10 @@ app.get("/", function (req, res) {
   res.render("pages/index");
 });
 
+app.get("/zaptic", function (req, res) {
+  res.render("pages/zaptic");
+});
+
 app.listen(port, () => {
   console.log(`Listening: http://localhost:${port}`);
 });
