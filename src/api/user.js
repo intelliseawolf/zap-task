@@ -18,7 +18,6 @@ export function addUser(req) {
   let csvData = [];
 
   for (let i in headers) {
-    console.log(headers);
     if (i == 0) {
       csvData = [...csvData, "\n" + (maxId + 1)];
     } else {
