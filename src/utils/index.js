@@ -3,10 +3,10 @@ import fs from "fs";
 export function getJsonFromCSV(filename) {
   let csv = fs.readFileSync(filename);
   let array = csv.toString().split("\r");
-  let result = [];
+  let data = [];
   let headers = array[0].split(",");
 
-  for (let i = 1; i < array.length - 1; i++) {
+  for (let i = 1; i < array.length; i++) {
     let obj = {};
     let strArray = array[i].split(",");
 
@@ -21,10 +21,18 @@ export function getJsonFromCSV(filename) {
       obj[headers[j]] = strArray[j];
     }
 
-    result.push(obj);
+    data.push(obj);
   }
 
-  let json = JSON.stringify(result);
+  return { data, headers };
+}
 
-  return json;
+export function addDataToCSV(data, filename) {
+  try {
+    fs.appendFileSync(filename, "\r" + data.toString());
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
 }
