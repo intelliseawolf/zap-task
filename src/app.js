@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import { getJsonFromCSV } from "./utils/index.js";
+import { getUser } from "./api/user.js";
 
 const port = 3000;
 const app = express();
@@ -21,6 +21,10 @@ app.get("/zaptic", function (req, res) {
   res.render("pages/zaptic");
 });
 
+app.get("/api/v1/users/:id", function (req, res) {
+  getUser(req);
+});
+
 app.get("*", function (req, res) {
   res.render("pages/404");
 });
@@ -28,7 +32,5 @@ app.get("*", function (req, res) {
 app.listen(port, () => {
   console.log(`Listening: http://localhost:${port}`);
 });
-
-console.log(getJsonFromCSV("src/data/users.csv"));
 
 export default app;
